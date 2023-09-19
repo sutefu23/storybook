@@ -1,10 +1,10 @@
 import { Square } from './Square'
 import type { Player } from './Game'
-type Props = {
+
+export type Props = {
   xIsNext: boolean
   squares: Player[]
   onPlay: (squares: Player[]) => void
-  onGameOver: (winner: Player) => void
 }
 export const Board = ({ xIsNext, squares, onPlay }: Props) => {
   const winner = calculateWinner(squares)
