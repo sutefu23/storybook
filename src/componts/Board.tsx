@@ -12,7 +12,8 @@ export const Board = ({ xIsNext, squares, onPlay }: Props) => {
   if (winner) {
     status = 'Winner: ' + winner
   } else {
-    status = 'Next Player: ' + (xIsNext ? 'X' : 'O')
+    // status = 'Next Player: ' + (xIsNext ? 'X' : 'O')
+    status = '次のプレイヤー: ' + (xIsNext ? 'X' : 'O')
   }
 
   const handleClick = (i: number) => {
