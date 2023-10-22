@@ -1,19 +1,26 @@
 import { Square } from './Square'
-import type { Player } from './Game'
+import { StatusBar } from './StatusBar'
+import type { Player, Status } from './Game'
 
 export type Props = {
   xIsNext: boolean
   squares: Player[]
   onPlay: (squares: Player[]) => void
+  rowCount?: number
+  colCount?: number
 }
-export const Board = ({ xIsNext, squares, onPlay }: Props) => {
+export const Board = ({ xIsNext, squares, onPlay, rowCount = 3, colCount = 3 }: Props) => {
   const winner = calculateWinner(squares)
-  let status
+  let status: Status
   if (winner) {
-    status = 'Winner: ' + winner
+    status = `Winner: ${winner}`
   } else {
-    // status = 'Next Player: ' + (xIsNext ? 'X' : 'O')
-    status = '次のプレイヤー: ' + (xIsNext ? 'X' : 'O')
+    const isFilledSquare = squares.filter((s) => !!s).length == rowCount * colCount //ゲーム終了判定
+    if (isFilledSquare) {
+      status = 'Draw!'
+    } else {
+      status = `Next Player: ${xIsNext ? 'X' : 'O'}`
+    }
   }
 
   const handleClick = (i: number) => {
@@ -32,26 +39,18 @@ export const Board = ({ xIsNext, squares, onPlay }: Props) => {
 
   return (
     <>
-      <div className="status">{status}</div>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
+      <StatusBar status={status} />
+      {[...new Array(rowCount)].map((_, i) => (
+        <div key={i} className="board-row">
+          {[...new Array(colCount)].map((_, j) => {
+            const index = colCount * i + j
+            return <Square key={j} value={squares[index]} onSquareClick={() => handleClick(index)} />
+          })}
+        </div>
+      ))}
     </>
   )
 }
-
 function calculateWinner(squares: Player[]) {
   const lines = [
     [0, 1, 2],

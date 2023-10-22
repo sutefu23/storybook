@@ -5,7 +5,7 @@ export type Props = {
 
 export const Square = ({ value, onSquareClick }: Props) => {
   return (
-    <button onClick={onSquareClick} className="square">
+    <button onClick={onSquareClick} className="square" >
       {value}
     </button>
   )

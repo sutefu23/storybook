@@ -28,3 +28,10 @@ export const FilledTriangle: StoryObj<Props> = {
     squares: Array(9).fill('△')
   }
 }
+
+export const DrawBoard: StoryObj<Props> = {
+  args: {
+    ...Default.args,
+    squares: ['O', 'X', 'X', 'X', 'O', 'O', 'O', 'X', 'X']
+  }
+}

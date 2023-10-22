@@ -19,6 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "dev": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
@@ -62,6 +63,7 @@
     "@typescript-eslint/parser": "^4.22.0",
     "babel-loader": "8.1.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "cypress": "^13.3.1",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-react": "^7.23.2",
